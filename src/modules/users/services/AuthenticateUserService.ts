@@ -1,5 +1,6 @@
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
+import { inject, injectable } from 'tsyringe';
 
 import authConfig from '@config/auth';
 
@@ -18,12 +19,16 @@ interface IResponseDTO {
   token: string;
 }
 
+@injectable()
 class AuthenticateUserService {
   /** Princípio: Dependency Inversion
    * Sempre que o Service tiver uma dependência externa,
    * iremos receber tal dependência como um parâmetro da Classe no constructor
    */
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
+  ) {}
 
   public async execute({
     email,

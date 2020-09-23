@@ -9,6 +9,7 @@ import AppError from '@shared/errors/AppError';
 import routes from './routes';
 
 import '@shared/infra/typeorm';
+import '@shared/container';
 
 function logRequests(request: Request, response: Response, next: NextFunction) {
   const { method, url } = request;

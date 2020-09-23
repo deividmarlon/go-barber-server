@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import { injectable, inject } from 'tsyringe';
 
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
@@ -11,13 +12,16 @@ interface IRequestDTO {
   user_id: string;
   avatar_filename: string;
 }
-
+@injectable()
 class UpdateUserAvatarService {
   /** Princípio: Dependency Inversion
    * Sempre que o Service tiver uma dependência externa,
    * iremos receber tal dependência como um parâmetro da Classe no constructor
    */
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
+  ) {}
 
   public async execute({
     user_id,

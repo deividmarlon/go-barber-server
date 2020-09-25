@@ -25,12 +25,11 @@ function logRequests(request: Request, response: Response, next: NextFunction) {
 }
 
 const app = express();
-app.use(express.static(__dirname + '/src'));
 
 app.use(cors());
 app.use(express.json());
 app.use(logRequests);
-app.use('/files', express.static(uploadConfig.directory));
+app.use('/files', express.static(uploadConfig.tmpFolder));
 app.use(routes);
 
 /** Trativas de Erros

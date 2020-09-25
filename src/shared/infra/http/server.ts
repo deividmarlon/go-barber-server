@@ -25,6 +25,8 @@ function logRequests(request: Request, response: Response, next: NextFunction) {
 }
 
 const app = express();
+app.use(express.static(__dirname + '/src'));
+
 app.use(cors());
 app.use(express.json());
 app.use(logRequests);

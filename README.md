@@ -45,7 +45,6 @@
 - As notificações do prestador devem ser armazenadas no MongoDB;
 - As notificações do prestador devem ser enviadas em tempo-real utilizando Socket.io;
 
-
 **RN**
 
 - A notificação deve ter um status de lida ou não lida para que o prestador possa controlar;

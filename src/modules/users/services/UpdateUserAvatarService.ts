@@ -7,6 +7,7 @@ import AppError from '@shared/errors/AppError';
 
 import User from '@modules/users/infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/IUsersRepository';
+import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider'
 
 interface IRequestDTO {
   user_id: string;
@@ -21,6 +22,11 @@ class UpdateUserAvatarService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
+    @inject('StorageProvider')
+    private storageProvider: IStorageProvider,
+
+
   ) {}
 
   public async execute({
@@ -37,24 +43,12 @@ class UpdateUserAvatarService {
     }
 
     if (user.avatar) {
-      const localFilesDirectory = uploadConfig.directory;
-
-      const userAvatarLocalFilePath = path.join(
-        localFilesDirectory,
-        user.avatar,
-      );
-      const userAvatarFileExists = await fs.promises.stat(
-        userAvatarLocalFilePath,
-      );
-      // A função fs.promises.stat() traz o status do arquivo caso o arquivo exista!
-
-      if (userAvatarFileExists) {
-        await fs.promises.unlink(userAvatarLocalFilePath);
-        // A função fs.promises.unlink() irá delatar o arquivo
-      }
+      this.storageProvider.deleteFile(user.avatar);
     }
 
-    user.avatar = avatar_filename;
+    const savedFileName = await this.storageProvider.saveFile(avatar_filename);
+
+    user.avatar = savedFileName;
     // A instância do user capturado no banco já está criada em user!
 
     await this.usersRepository.save(user);

@@ -29,7 +29,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(logRequests);
-app.use('/files', express.static(uploadConfig.tmpFolder));
+app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
 
 /** Trativas de Erros

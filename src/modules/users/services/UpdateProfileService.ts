@@ -40,8 +40,6 @@ class UpdateProfileService {
 
     const user = await this.usersRepository.findById(user_id);
 
-    console.log(user);
-
     if (!user) {
       throw new AppError('User not found!',401,);
     }

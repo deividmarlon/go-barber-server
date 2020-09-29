@@ -1,4 +1,4 @@
-# Recuperação de senha
+# [X] Recuperação de senha
 
 **RF** Requisitos funcionais
 
@@ -17,7 +17,7 @@
 - O link enviado para resetar senha deve expirar em 2h;
 - O usuário precisa confirmar a nova senha ao resetar senha;
 
-# Atualização de perfil
+# [ ] Atualização de perfil
 
 **RF**
 
@@ -31,7 +31,7 @@
 
 
 
-# Painel do prestador de serviço
+# [ ] Painel do prestador de serviço
 
 **RF**
 
@@ -49,7 +49,7 @@
 
 - A notificação deve ter um status de lida ou não lida para que o prestador possa controlar;
 
-# Agendamento de serviços
+# [ ] Agendamento de serviços
 
 **RF**
 

@@ -17,7 +17,7 @@
 - O link enviado para resetar senha deve expirar em 2h;
 - O usuário precisa confirmar a nova senha ao resetar senha;
 
-# [ ] Atualização de perfil
+# [X] Atualização de perfil
 
 **RF**
 

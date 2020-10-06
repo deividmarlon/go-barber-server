@@ -5,7 +5,7 @@ import Appointment from '@modules/appointments/infra/typeorm/entities/Appointmen
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
 import IFindAllInMonthFromProviderDTO from '@modules/appointments/dtos/IFindAllInMonthFromProviderDTO';
-import IFindAllInDayFromProvicerDTO from '@modules/appointments/dtos/IFindAllInDayFromProvicerDTO';
+import IFindAllInDayFromProvicerDTO from '@modules/appointments/dtos/IFindAllInDayFromProviderDTO';
 
 class AppointmentsRepository implements IAppointmentsRepository {
 
@@ -31,7 +31,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return findAppointments;
   }
 
-  public async findAllInDayFromProvicer(
+  public async findAllInDayFromProvider(
     {provider_id, day, month, year}: IFindAllInDayFromProvicerDTO
   ): Promise<Appointment[]> {
 
@@ -47,12 +47,13 @@ class AppointmentsRepository implements IAppointmentsRepository {
 
   public async create({
     provider_id,
+    user_id,
     date,
   }: ICreateAppointmentDTO): Promise<Appointment> {
 
     const appointment = new Appointment();
 
-    Object.assign(appointment, {id: uuid(), provider_id, date})
+    Object.assign(appointment, {id: uuid(), provider_id, user_id, date})
 
     this.appointments.push(appointment);
 

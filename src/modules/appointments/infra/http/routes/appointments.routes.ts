@@ -1,13 +1,3 @@
-import { Router } from 'express';
-
-import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
-import AppointmentsController from '../controllers/AppointmentsController';
-
-const appointmentsRouter = Router();
-
-appointmentsRouter.use(ensureAuthenticated);
-
-const appointmentsController = new AppointmentsController();
 // Levando em consideração o conceito de SoC - Separation of Concerns,
 // a rota deve se preocupar somente com:
 //  Receber a requisição --> transformar dado se necessário -->
@@ -20,6 +10,23 @@ const appointmentsController = new AppointmentsController();
   return response.json(appointments);
 }); */
 
+import { Router } from 'express';
+
+import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
+import AppointmentsController from '../controllers/AppointmentsController';
+import ProviderAppointmentsController from '../controllers/ProviderAppointmentsController';
+
+
+const appointmentsRouter = Router();
+
+appointmentsRouter.use(ensureAuthenticated);
+
+const appointmentsController = new AppointmentsController();
+const providerAppointmentsController = new ProviderAppointmentsController();
+
 appointmentsRouter.post('/', appointmentsController.create);
+
+appointmentsRouter.get('/me', providerAppointmentsController.index);
+
 
 export default appointmentsRouter;

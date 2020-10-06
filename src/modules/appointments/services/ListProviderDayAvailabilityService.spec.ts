@@ -2,7 +2,6 @@ import AppError from '@shared/errors/AppError';
 
 import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository';
 import ListProviderDayAvailabilityService from './ListProviderDayAvailabilityService'
-import { JsonWebTokenError } from 'jsonwebtoken';
 
 let fakeAppointmentsRepository: FakeAppointmentsRepository;
 let listProviderDayAvailability: ListProviderDayAvailabilityService;
@@ -18,12 +17,15 @@ describe('ListProviderDayAvailability', ()=>{
 
   it('should be able to list the day avaiability from provider', async ()=>{
     await fakeAppointmentsRepository.create({
-      provider_id: 'user_id',
+      provider_id: 'provider_id',
+      user_id: 'user_id',
+
       date: new Date(2020,4,20,14,0,0),
     })
 
     await fakeAppointmentsRepository.create({
-      provider_id: 'user_id',
+      provider_id: 'provider_id',
+      user_id: 'user_id',
       date: new Date(2020,4,20,15,0,0),
     })
 
@@ -32,7 +34,7 @@ describe('ListProviderDayAvailability', ()=>{
     })
 
     const avaiability = await listProviderDayAvailability.execute({
-      provider_id: 'user_id',
+      provider_id: 'provider_id',
       day: 20,
       month: 5,
       year: 2020,
@@ -54,8 +56,5 @@ describe('ListProviderDayAvailability', ()=>{
           { hour: 16, available: true},
         ]
     ))
-
   });
-
-
 })

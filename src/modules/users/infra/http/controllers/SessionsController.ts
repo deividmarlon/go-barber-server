@@ -17,10 +17,6 @@ export default class SessionsController {
       password,
     });
 
-    console.log(process.env.AWS_ACESS_KEY_ID);
-    console.log(process.env.AWS_SECRET_ACCESS_KEY);
-    console.log(process.env.AWS_DEFAULT_REGION);
-
     return response.json({ user: classToClass(user), token });
   }
 }

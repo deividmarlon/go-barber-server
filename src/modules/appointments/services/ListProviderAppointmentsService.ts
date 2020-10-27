@@ -44,8 +44,6 @@ class ListProviderAppointmentsService {
         year
       });
 
-      console.log('Query no banco realizada');
-
       await this.cacheProvider.save(cacheKey, appointments);
     }
 

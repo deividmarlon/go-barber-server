@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { parseISO } from 'date-fns';
 import { container } from 'tsyringe';
 
 import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
@@ -12,7 +11,6 @@ export default class AppointmentsController {
 
     const { provider_id, date } = request.body;
 
-    const parsedDate = parseISO(date);
     // parseISO converte a string para um objeto Date() javascript
     // transformação do dado não é regra de negócio!
 
@@ -21,7 +19,7 @@ export default class AppointmentsController {
     const appointment = await createAppointment.execute({
       provider_id,
       user_id,
-      date: parsedDate,
+      date,
     });
 
     return response.json(appointment);

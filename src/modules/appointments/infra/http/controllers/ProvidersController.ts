@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import ListProvidersService from '@modules/appointments/services/ListProvidersService';
-
 // Um CONTROLLER deve ter no máximo 5 métodos:
   // index, show, create, update, delete
 
@@ -16,6 +16,6 @@ export default class ProvidersController {
       user_id
     });
 
-    return response.json(providers);
+    return response.json(classToClass(providers));
   }
 }

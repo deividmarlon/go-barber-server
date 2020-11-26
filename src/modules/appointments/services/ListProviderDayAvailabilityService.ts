@@ -61,6 +61,12 @@ class ListProviderDayAvailabilityService {
       )
 
       const compareDate = new Date(year,month-1,day,hour);
+      console.log(`${year}/${month-1}/${day}/${hour}`);
+      console.log(currentDate.toLocaleDateString());
+      console.log(compareDate.toLocaleDateString());
+      console.log(isAfter(compareDate,currentDate));
+      console.log(!hasAppointmentInHour);
+      console.log('\n');
 
       return {
         hour,

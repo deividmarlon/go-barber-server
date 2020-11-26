@@ -24,7 +24,6 @@ interface IUploadConfig {
 export default {
 
     driver: process.env.STORAGE_DRIVER,
-
     tmpFolder: tmpFolder,
     uploadsFolder: path.resolve(tmpFolder,'uploads'),
 
